@@ -1,0 +1,39 @@
+.landing-page {
+  text-align: center;
+  padding: 100px 20px;
+  background-color: #f1f3f4;
+}
+
+.landing-page h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: #333;
+  font-family: 'Arial', sans-serif;
+}
+
+.landing-page p {
+  font-size: 20px;
+  margin-bottom: 40px;
+  color: #666;
+  font-family: 'Arial', sans-serif;
+}
+
+.contact-button {
+  padding: 12px 30px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-family: 'Arial', sans-serif;
+}
+
+.contact-button:hover {
+  background-color: #0056b3;
+}
+
+.landing-image {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 800px;
+}

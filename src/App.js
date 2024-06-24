@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { initKeycloak } from './keycloak';
+import Navbar from './components/Navbar';
+import LandingPage from './components/LandingPage';
+import Dashboard from './components/Dashboard';
+import AdminPanel from './components/AdminPanel';
+import Pricing from './components/Pricing';
+import CustomRegister from './components/CustomRegister';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    initKeycloak(() => {
+      setIsAuthenticated(true);
+    });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar isLoggedIn={isAuthenticated} />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/custom-register" element={<CustomRegister />} />
+        {isAuthenticated ? (
+          <>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/admin" element={<AdminPanel />} />
+          </>
+        ) : (
+          <Route path="*" element={<Navigate to="/" />} />
+        )}
+      </Routes>
+    </Router>
   );
 }
 
